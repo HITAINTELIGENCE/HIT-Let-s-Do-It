@@ -1,12 +1,12 @@
 import torch.nn as nn
-from model import UNet
 import os
 import torch
 import argparse
 from PIL import Image
 from torch.utils.data import DataLoader
-from dataset import VITONDataset
-from utils import test_transform
+from cloth_mask.dataset_mask import VITONDataset
+from cloth_mask.utils_mask import test_transform
+from cloth_mask.model_mask import UNet
 import numpy as np
 
 
@@ -52,12 +52,14 @@ def get():
             y_hat = model(x).squeeze(0) #(1, 1, H, W) -> (H, W)
             y_hat_mask = y_hat.sigmoid().round().long().cpu().numpy()
             output_img = Image.fromarray(y_hat_mask[0].astype(np.uint8))
-            mask_result_path = os.path.join(args.output, img_name[:-4] + '.png')
+            # mask_result_path = os.path.join(args.output, img_name[:-4] + '.png')
             output_img.putpalette(palette)
-            output_img.save(mask_result_path)
+            # output_img.save(mask_result_path)
+            output_img_rgb = output_img.convert('L')
+            print(np.array(output_img_rgb).shape)
+            jpeg_result_path = os.path.join(args.output, img_name[:-4] + '.jpg')
+            output_img_rgb.save(jpeg_result_path, format='JPEG')
     return
 
-def execute():
+def execute_mask():
     get()
-
-execute()
