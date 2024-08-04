@@ -5,7 +5,7 @@ from torchvision.models.densenet import densenet121
 from collections import OrderedDict
 from collections import OrderedDict
 from torch.utils import model_zoo
-from densenet import DenseNet
+from human_parsing.models.densenet import DenseNet
 
 
 def densenet(pretrained=True):

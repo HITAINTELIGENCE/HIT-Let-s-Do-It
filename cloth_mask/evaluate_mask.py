@@ -56,10 +56,11 @@ def get():
             output_img.putpalette(palette)
             # output_img.save(mask_result_path)
             output_img_rgb = output_img.convert('L')
-            print(np.array(output_img_rgb).shape)
             jpeg_result_path = os.path.join(args.output, img_name[:-4] + '.jpg')
             output_img_rgb.save(jpeg_result_path, format='JPEG')
     return
 
 def execute_mask():
     get()
+
+execute_mask()

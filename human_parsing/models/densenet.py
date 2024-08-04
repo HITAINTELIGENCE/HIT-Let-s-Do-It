@@ -3,8 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.models.densenet import densenet121
 from collections import OrderedDict
-from collections import OrderedDict
-from torch.utils import model_zoo
 
 
 class _DenseLayer(nn.Sequential):
