@@ -17,7 +17,7 @@
 
 + The following project is an implementation of paper "VITON: An Image-based Virtual Try-on Network" from University of Maryland, College Park, China. https://arxiv.org/abs/1711.08447
 
-## Implementation
+## 🛠️ Implementation
 + Pose generation using openpose
 + Human parsing using psp-net
 + Used Generative Adversarial Networks with Adversarial loss, perceptual loss and L1 loss for smoothening.
