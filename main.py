@@ -19,6 +19,9 @@ RESULT_DIR = "./Database/val/tryon-person"
 os.makedirs(PERSON_DIR, exist_ok=True)
 os.makedirs(CLOTH_DIR, exist_ok=True)
 
+def change_extension(filename, new_extension):
+    return os.path.splitext(filename)[0] + new_extension
+
 @app.post('/upload/')
 async def uploaded_images(
     user_name: str = Form(...),
@@ -26,43 +29,47 @@ async def uploaded_images(
     file_cloth: UploadFile = File(...)
 ):
     try:
-        # Đọc ảnh từ file_person và lưu
+        # Đọc ảnh từ file_person và lưu với đuôi .jpg
         image_person = Image.open(io.BytesIO(file_person.file.read()))
-        save_path_person = os.path.join(PERSON_DIR, file_person.filename)
-        image_person.save(save_path_person)
+        person_filename_jpg = change_extension(file_person.filename, '.jpg')
+        save_path_person = os.path.join(PERSON_DIR, person_filename_jpg)
+        image_person = image_person.convert('RGB')  # Chuyển đổi sang RGB nếu ảnh có alpha channel
+        image_person.save(save_path_person, format='JPEG')
 
-        # Đọc ảnh từ file_cloth và lưu
+        # Đọc ảnh từ file_cloth và lưu với đuôi .jpg
         image_cloth = Image.open(io.BytesIO(file_cloth.file.read()))
         image_cloth = image_cloth.resize((192, 256))
-        save_path_cloth = os.path.join(CLOTH_DIR, file_cloth.filename)
-        image_cloth.save(save_path_cloth)
+        cloth_filename_jpg = change_extension(file_cloth.filename, '.jpg')
+        save_path_cloth = os.path.join(CLOTH_DIR, cloth_filename_jpg)
+        image_cloth = image_cloth.convert('RGB')  # Chuyển đổi sang RGB nếu ảnh có alpha channel
+        image_cloth.save(save_path_cloth, format='JPEG')
 
         # Xử lý mask cho áo
         execute_mask()
 
         # Phân tích pose
-        pose_parse(file_person.filename)
+        pose_parse(person_filename_jpg)
 
         # Phân tích người
         execute()
+
         # Gắn áo vào cơ thể
         with open("./Database/val_pairs.txt", "w") as f:
-                    f.write(file_person.filename  + " " + file_cloth.filename)
+            f.write(person_filename_jpg + " " + cloth_filename_jpg)
 
         predict()
 
-         # Đường dẫn ảnh kết quả
-        result_image_path = os.path.join(RESULT_DIR, f"{file_cloth.filename}")
+        # Đường dẫn ảnh kết quả
+        result_image_path = os.path.join(RESULT_DIR, cloth_filename_jpg)
         
         if os.path.exists(result_image_path):
             return FileResponse(result_image_path, media_type='image/jpeg', filename=f"{user_name}_result.jpg")
         else:
             return {"status": "Processing completed, but result image not found",
                     "test": result_image_path}
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
 
 if __name__ == '__main__':
     uvicorn.run(app, host='127.0.0.1', port=9000)
