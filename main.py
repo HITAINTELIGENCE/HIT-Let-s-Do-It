@@ -33,6 +33,7 @@ async def uploaded_images(
 
         # Đọc ảnh từ file_cloth và lưu
         image_cloth = Image.open(io.BytesIO(file_cloth.file.read()))
+        image_cloth = image_cloth.resize((192, 256))
         save_path_cloth = os.path.join(CLOTH_DIR, file_cloth.filename)
         image_cloth.save(save_path_cloth)
 
