@@ -5,7 +5,7 @@ import io
 import os
 import uvicorn
 from cloth_mask.evaluate_mask import execute_mask
-from pose_map.pose_parser import pose_parse
+from pose_map.pose_parser_api import pose_parse
 from human_parsing.evaluate_human_parsing import execute
 from try_on_clothes.script import predict
 
@@ -28,7 +28,7 @@ async def uploaded_images(
     try:
         # Đọc ảnh từ file_person và lưu
         image_person = Image.open(io.BytesIO(file_person.file.read()))
-        save_path_person = os.path.join(PERSON_DIR, f"{user_name}.jpg")
+        save_path_person = os.path.join(PERSON_DIR, file_person.filename)
         image_person.save(save_path_person)
 
         # Đọc ảnh từ file_cloth và lưu
@@ -40,7 +40,7 @@ async def uploaded_images(
         execute_mask()
 
         # Phân tích pose
-        pose_parse(user_name)
+        pose_parse(file_person.filename)
 
         # Phân tích người
         execute()
