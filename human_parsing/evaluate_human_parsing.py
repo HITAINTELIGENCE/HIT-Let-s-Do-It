@@ -1,16 +1,3 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-
-"""
-@Author  :   Peike Li
-@Contact :   peike.li@yahoo.com
-@File    :   evaluate.py.py
-@Time    :   8/30/19 8:59 PM
-@Desc    :   Evaluation Scripts
-@License :   This source code is licensed under the license found in the 
-             LICENSE file in the root directory of this source tree.
-"""
-
 import os
 import torch
 import argparse
@@ -20,16 +7,10 @@ from PIL import Image
 import torch.nn as nn
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
-# import sys
 
-# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-# from models.densenet import DenseNet
 from human_parsing.models.pspnet import PSPNet
 from human_parsing.dataset.datasets import HumanDataset
 
-import logging
-import matplotlib
-import matplotlib.pyplot as plt
 import torch
 from torchvision import transforms
 

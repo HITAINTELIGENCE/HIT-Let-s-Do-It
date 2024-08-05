@@ -56,47 +56,27 @@ if uploaded_person is not None:
             st.image(person, caption=user_input, width=100, use_column_width=False)
             st.write("Saving Image")
             bar = st.progress(0)
-            for percent_complete in range(100):
-                time.sleep(0.09)
-                bar.progress(percent_complete + 1)
             person.save("./Database/val/person/" + user_input + ".jpg")
             cloth = Image.open(uploaded_cloth)
             cloth = cloth.resize((192, 256))
             st.image(cloth, caption="new_cloth_1", width=100, use_column_width=False)
             st.write("Saving Image")
             bar = st.progress(0)
-            for percent_complete in range(100):
-                time.sleep(0.09)
-                bar.progress(percent_complete + 1)
             cloth.save("./Database/val/cloth/" + "new_cloth_1" + ".jpg")
             execute_mask()
             progress_bar = st.progress(0)
             st.write("Generating Mask and Pose Pairs")
             pose_parse(user_input)
             execute()
-            for percent_complete in range(100):
-                time.sleep(0.05)
-                progress_bar.progress(percent_complete + 1)
             st.write("Please click the Click Button after Pose pairs and Masks are generated")
             if st.button('Execute'):
                 with open("./Database/val_pairs.txt", "w") as f:
                     f.write(user_input + ".jpg " + selected + "_1.jpg")
                 predict()
-                im = Image.open("./output/second/TOM/val/" + selected + "_1.jpg")
-                width, height = im.size
-                left = width / 3
-                top = 2 * height / 3
-                right = 2 * width / 3
-                bottom = height
-                im1 = im.crop((left, top, right, bottom))
-                im1 = im1.resize((256, 256))
-                im1 = im1.filter(ImageFilter.SHARPEN)
-                im1.save("./output/second/TOM/val/" + selected + "_1.jpg")
-                execute_bar = st.progress(0)
-                for percent_complete in range(100):
-                    time.sleep(0.08)
-                    execute_bar.progress(percent_complete + 1)
-                result = Image.open("./output/second/TOM/val/" + selected + "_1.jpg")
+                im = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
+                im = im.filter(ImageFilter.SHARPEN)
+                im.save("./Database/val/tryon-person/" + selected + "_1.jpg")
+                result = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
                 st.image(result, caption="Result", width=200, use_column_width=False)
 
         else:
@@ -113,37 +93,19 @@ if uploaded_person is not None:
             st.image(person, caption=user_input, width=100, use_column_width=False)
             st.write("Saving Image")
             bar = st.progress(0)
-            for percent_complete in range(100):
-                time.sleep(0.09)
-                bar.progress(percent_complete + 1)
             person.save("./Database/val/person/" + user_input + ".jpg")
-            progress_bar = st.progress(0)
             st.write("Generating Mask and Pose Pairs")
             pose_parse(user_input)
             execute()
-            for percent_complete in range(100):
-                time.sleep(0.05)
-                progress_bar.progress(percent_complete + 1)
             st.write("Please click the Click Button after Pose pairs and Masks are generated")
             if st.button('Execute'):
                 with open("./Database/val_pairs.txt", "w") as f:
                     f.write(user_input + ".jpg " + selected + "_1.jpg")
                 predict()
-                im = Image.open("./output/second/TOM/val/" + selected + "_1.jpg")
-                width, height = im.size
-                left = width / 3
-                top = 2 * height / 3
-                right = 2 * width / 3
-                bottom = height
-                im1 = im.crop((left, top, right, bottom))
-                im1 = im1.resize((256, 256))
-                im1 = im1.filter(ImageFilter.SHARPEN)
-                im1.save("./output/second/TOM/val/" + selected + "_1.jpg")
-                execute_bar = st.progress(0)
-                for percent_complete in range(100):
-                    time.sleep(0.08)
-                    execute_bar.progress(percent_complete + 1)
-                result = Image.open("./output/second/TOM/val/" + selected + "_1.jpg")
+                im = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
+                im = im.filter(ImageFilter.SHARPEN)
+                im.save("./Database/val/tryon-person/" + selected + "_1.jpg")
+                result = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
                 st.image(result, caption="Result", width=200, use_column_width=False)
         else:
             st.error("Please select an item from the library and enter the user name.")

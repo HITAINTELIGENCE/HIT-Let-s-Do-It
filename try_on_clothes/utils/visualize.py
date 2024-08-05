@@ -59,8 +59,17 @@ def tensor_for_image(img_tensor):
 
 def save_images(img_tensors, img_names, save_dir):
     for img_tensor, img_name in zip(img_tensors, img_names):
-        array = tensor_for_image(img_tensor)        
+        # Chuyển đổi tensor thành ảnh RGB
+        tensor = tensor_for_board(img_tensor)
+        
+        # Đảm bảo ảnh đầu ra có 3 kênh RGB
+        if tensor.size(1) == 1:
+            # Nếu tensor có 1 kênh (ảnh grayscale), sao chép thành 3 kênh
+            tensor = tensor.repeat(1, 3, 1, 1)
+
+        array = tensor_for_image(tensor)        
         Image.fromarray(array).save(os.path.join(save_dir, img_name))
+
 
 def save_visual(img_tensors_list, img_names, save_dir):
     img_tensors = tensor_list_for_board(img_tensors_list)
