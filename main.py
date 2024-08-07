@@ -4,6 +4,7 @@ from PIL import Image
 import io
 import os
 import uvicorn
+import download_pre_trained
 from cloth_mask.evaluate_mask import execute_mask
 from pose_map.pose_parser_api import pose_parse
 from human_parsing.evaluate_human_parsing import execute
