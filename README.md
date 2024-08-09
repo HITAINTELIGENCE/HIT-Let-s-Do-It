@@ -61,10 +61,12 @@ Here is the link to the training process.
 
 
 ## 🗃️ Dataset
-[LIP dataset to training human parsing](https://sysu-hcp.net/lip/)
++ [LIP dataset to training human parsing](https://sysu-hcp.net/lip/)
 
-[VITON_HD dataset to training cloth mask and model](https://www.dropbox.com/scl/fi/xu08cx3fxmiwpg32yotd7/zalando-hd-resized.zip?rlkey=ks83mdv2pvmrdl2oo2bmmn69w&e=1&dl=0)
-[Additional Dataset Train](https://drive.google.com/drive/folders/1UfuLsd5pyYOr_TiSwbuK1fphNEF4a7GL?usp=sharing)
++ [VITON_HD dataset to training cloth mask and model](https://www.dropbox.com/scl/fi/xu08cx3fxmiwpg32yotd7/zalando-hd-resized.zip?rlkey=ks83mdv2pvmrdl2oo2bmmn69w&e=1&dl=0)
+
++ [Additional Dataset Train](https://drive.google.com/drive/folders/1UfuLsd5pyYOr_TiSwbuK1fphNEF4a7GL?usp=sharing)
+
 ## ⚙️ Installation
 
 ### Download repository
