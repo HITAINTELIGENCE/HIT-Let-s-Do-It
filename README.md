@@ -38,6 +38,28 @@
 + Used Generative Adversarial Networks with Adversarial loss, perceptual loss and L1 loss for smoothening.
 + Used U-Net for generator and a downsampler for discriminator.
 
+## 📈 Training process
++ The pose generated and parser and person image are concatenated along with and cloth imgae are fedded to GMM.
++ Output of above is a warped cloth.
++ Now that concatenated image along with warped cloth is feeded to Gans.
++ Final output is image of person wearing desired cloth.
++ Final loss of generator on validation : 5.016
++ Final loss of discriminator on validation :0.03
++ Epochs Trained : 100
++ Optimizer : Ranger
+
+
+Here is the link to the training process.
+
++ [Final_Training_TOM](https://www.kaggle.com/code/hakorushiroki/try-on-gan)
+
++ [Training_GMM](https://www.kaggle.com/dekiru146/try-on)
+
++ [Human_Parsing](https://www.kaggle.com/dekiru146/lip-training-real)
+
++ [Cloth_mask](https://www.kaggle.com/dekiru146/viton-dekiru)
+
+
 ## 🗃️ Dataset
 [LIP dataset to training human parsing](https://sysu-hcp.net/lip/)
 
@@ -64,6 +86,11 @@ Download the Model files from the link provided below in the appropriate locatio
 ### Using app
 ```
 streamlit run app.py
+```
+
+### Using fastapi
+```
+python main.py
 ```
 
 ## 📃 Documents
