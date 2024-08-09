@@ -9,6 +9,21 @@
 
 ![Output](output/second/TOM/val/002385_1.jpg)
 
+
+## 🔎 Danh Mục
+
+1. [Introduction](#💡-Introduction)
+2. [Description](#📝-Description)
+3. [Implementation](#🛠️-Implementation)
+4. [Dataset](#🗃️-Dataset)
+5. [Installation](⚙️-Installation)
+    - [Download repository](#Download-repository)
+    - [Requirements](#Requirements)
+    - [Pre-trained](#Pre-trained)
+    - [Using app](#Using-app)
+6. [📃 Documents](#📃-Documents)
+7. [🔗 Related](#🔗-Related)
+
 ## 💡 Introduction
 + The project is inspired by the needs of the dropshipping T-shirt model. It aims to enable users to upload photos of themselves to virtually try on clothes, making it easier to finalize their purchases when they find a suitable match. 
 
@@ -27,6 +42,7 @@
 [LIP dataset to training human parsing](https://sysu-hcp.net/lip/)
 
 [VITON_HD dataset to training cloth mask and model](https://www.dropbox.com/scl/fi/xu08cx3fxmiwpg32yotd7/zalando-hd-resized.zip?rlkey=ks83mdv2pvmrdl2oo2bmmn69w&e=1&dl=0)
+[Additional Dataset Train](https://drive.google.com/drive/folders/1UfuLsd5pyYOr_TiSwbuK1fphNEF4a7GL?usp=sharing)
 ## ⚙️ Installation
 
 ### Download repository
@@ -39,7 +55,7 @@ git clone https://github.com/HITAINTELIGENCE/Try-on-clothes.git
 pip install -r requirements.txt
 ```
 
-### pre-trained
+### Pre-trained
 
 Download the Model files from the link provided below in the appropriate locations.
 
