@@ -125,5 +125,3 @@ def get():
 
 def execute():
     get()
-
-execute()

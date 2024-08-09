@@ -65,6 +65,3 @@ def predict():
     with torch.no_grad():
         run(config_tom, model_tom, dataloader_tom, mode)
     print('Successfully completed')
-
-# Gọi hàm predict
-predict()

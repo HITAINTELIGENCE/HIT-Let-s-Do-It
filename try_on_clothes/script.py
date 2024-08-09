@@ -52,5 +52,3 @@ def predict():
   print('Successfully completed')
 # Resive image code
 
-
-predict()
