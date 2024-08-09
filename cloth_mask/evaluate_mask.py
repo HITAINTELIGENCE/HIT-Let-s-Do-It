@@ -62,5 +62,3 @@ def get():
 
 def execute_mask():
     get()
-
-execute_mask()
