@@ -12,17 +12,17 @@
 
 ## 🔎 Danh Mục
 
-1. [Introduction](#💡-Introduction)
-2. [Description](#📝-Description)
-3. [Implementation](#🛠️-Implementation)
-4. [Dataset](#🗃️-Dataset)
-5. [Installation](⚙️-Installation)
-    - [Download repository](#Download-repository)
-    - [Requirements](#Requirements)
-    - [Pre-trained](#Pre-trained)
-    - [Using app](#Using-app)
-6. [📃 Documents](#📃-Documents)
-7. [🔗 Related](#🔗-Related)
+1. [Introduction](#💡-introduction)
+2. [Description](#📝-description)
+3. [Implementation](#🛠️-implementation)
+4. [Dataset](#🗃️-dataset)
+5. [Installation](#⚙️-installation)
+    - [Download repository](#download-repository)
+    - [Requirements](#requirements)
+    - [Pre-trained](#pre-trained)
+    - [Using app](#using-app)
+6. [Documents](#📃-documents)
+7. [Related](#🔗-related)
 
 ## 💡 Introduction
 + The project is inspired by the needs of the dropshipping T-shirt model. It aims to enable users to upload photos of themselves to virtually try on clothes, making it easier to finalize their purchases when they find a suitable match. 
