@@ -2,10 +2,11 @@ import streamlit as st
 from PIL import Image, ImageFilter
 from try_on_clothes.script import predict
 import time
-
+from try_on_clothes.utils.upscale import up_scale_x3_normal_fast
 from human_parsing.evaluate_human_parsing import execute
 from pose_map.pose_parser import pose_parse
 from cloth_mask.evaluate_mask import execute_mask
+import io
 
 st.title("Virtual Try ON")
 
@@ -54,31 +55,43 @@ if uploaded_person is not None:
         if user_input and uploaded_cloth:
             person = Image.open(uploaded_person)
             st.image(person, caption=user_input, width=100, use_column_width=False)
-            st.write("Saving Image")
             bar = st.progress(0)
             person.save("./Database/val/person/" + user_input + ".jpg")
             cloth = Image.open(uploaded_cloth)
             cloth = cloth.resize((192, 256))
             st.image(cloth, caption="new_cloth_1", width=100, use_column_width=False)
-            st.write("Saving Image")
             bar = st.progress(0)
             cloth.save("./Database/val/cloth/" + "new_cloth_1" + ".jpg")
+            start = time.time()
             execute_mask()
             progress_bar = st.progress(0)
-            st.write("Generating Mask and Pose Pairs")
             pose_parse(user_input)
             execute()
-            st.write("Please click the Click Button after Pose pairs and Masks are generated")
-            if st.button('Execute'):
-                with open("./Database/val_pairs.txt", "w") as f:
-                    f.write(user_input + ".jpg " + selected + "_1.jpg")
-                predict()
-                im = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
-                im = im.filter(ImageFilter.SHARPEN)
-                im.save("./Database/val/tryon-person/" + selected + "_1.jpg")
-                result = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
-                st.image(result, caption="Result", width=200, use_column_width=False)
+            with open("./Database/val_pairs.txt", "w") as f:
+                f.write(user_input + ".jpg " + selected + "_1.jpg")
+            predict()
+            im = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
+            im = im.filter(ImageFilter.SHARPEN)
+            im.save("./Database/val/tryon-person/" + selected + "_1.jpg")
+            result = up_scale_x3_normal_fast("./Database/val/tryon-person/" + selected + "_1.jpg", "./Database/val/tryon-person/" + selected + "_1.jpg")
+            result = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
+            st.image(result, caption="Result", width=200, use_column_width=False)
+            st.write(f"The duration of the process is {time.time()- start}")
 
+            st.balloons()
+            st.snow()
+
+            img_buffer = io.BytesIO()
+            result.save(img_buffer, format="JPEG")
+            img_bytes = img_buffer.getvalue()
+
+            st.download_button(
+                label="Download image",
+                data=img_bytes,
+                file_name=selected + "_1.jpg",
+                mime="image/jpeg"
+            )
+                
         else:
             st.error("Please upload a shirt and enter the user name.")
 
@@ -91,22 +104,35 @@ if uploaded_person is not None:
         if user_input and selected:
             person = Image.open(uploaded_person)
             st.image(person, caption=user_input, width=100, use_column_width=False)
-            st.write("Saving Image")
             bar = st.progress(0)
             person.save("./Database/val/person/" + user_input + ".jpg")
-            st.write("Generating Mask and Pose Pairs")
+            start = time.time()
             pose_parse(user_input)
             execute()
-            st.write("Please click the Click Button after Pose pairs and Masks are generated")
-            if st.button('Execute'):
-                with open("./Database/val_pairs.txt", "w") as f:
-                    f.write(user_input + ".jpg " + selected + "_1.jpg")
-                predict()
-                im = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
-                im = im.filter(ImageFilter.SHARPEN)
-                im.save("./Database/val/tryon-person/" + selected + "_1.jpg")
-                result = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
-                st.image(result, caption="Result", width=200, use_column_width=False)
+            with open("./Database/val_pairs.txt", "w") as f:
+                f.write(user_input + ".jpg " + selected + "_1.jpg")
+            predict()
+            im = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
+            im = im.filter(ImageFilter.SHARPEN)
+            im.save("./Database/val/tryon-person/" + selected + "_1.jpg")
+            result = up_scale_x3_normal_fast("./Database/val/tryon-person/" + selected + "_1.jpg", "./Database/val/tryon-person/" + selected + "_1.jpg")
+            result = Image.open("./Database/val/tryon-person/" + selected + "_1.jpg")
+            st.image(result, caption="Result", width=200, use_column_width=False)
+            st.write(f"The duration of the process is {time.time()- start}")
+
+            st.balloons()
+            st.snow()
+
+            img_buffer = io.BytesIO()
+            result.save(img_buffer, format="JPEG")
+            img_bytes = img_buffer.getvalue()
+
+            st.download_button(
+                label="Download image",
+                data=img_bytes,
+                file_name=selected + "_1.jpg",
+                mime="image/jpeg"
+            )
         else:
             st.error("Please select an item from the library and enter the user name.")
 else:

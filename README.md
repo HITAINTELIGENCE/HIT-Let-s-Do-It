@@ -9,6 +9,8 @@
 
 ![Output](output/second/TOM/val/002385_1.jpg)
 
+![Output](Database/val/tryon-person/002385_1.jpg)
+
 
 ## 🔎 Danh Mục
 

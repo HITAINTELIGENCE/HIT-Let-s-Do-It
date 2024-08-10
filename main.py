@@ -5,6 +5,7 @@ import io
 import os
 import uvicorn
 import download_pre_trained
+from try_on_clothes.utils.upscale import up_scale_x3_normal_fast
 from cloth_mask.evaluate_mask import execute_mask
 from pose_map.pose_parser_api import pose_parse
 from human_parsing.evaluate_human_parsing import execute
@@ -59,8 +60,8 @@ async def uploaded_images(
             f.write(person_filename_jpg + " " + cloth_filename_jpg)
 
         predict()
+        result = up_scale_x3_normal_fast("./Database/val/tryon-person/" + cloth_filename_jpg, "./Database/val/tryon-person/" + cloth_filename_jpg)
 
-        # Đường dẫn ảnh kết quả
         result_image_path = os.path.join(RESULT_DIR, cloth_filename_jpg)
         
         if os.path.exists(result_image_path):
